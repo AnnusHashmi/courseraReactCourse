@@ -1,24 +1,35 @@
 import React, { Component } from 'react';
-import Menu from './components/Menu'
-import Navigation from './components/Navbar'
-import DISHES from './shared/menu'
+import Main from './components/main'
+import './App.css'
+import Home from './components/home';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  BrowserRouter
+} from "react-router-dom";
+import { Provider } from 'react-redux';
+import ConfigureStore  from './redux/configStore';
+
+const store = ConfigureStore();
 
 
 class App extends Component
 {
   constructor(props){
     super(props);
-
-    this.state = {
-      dishes : DISHES
-    }
   }
   render(){
     return(
-      <div>
-        <Navigation></Navigation>
-        <Menu dishes = {this.state.dishes}></Menu>
-      </div>
+      <Provider store={store}>
+      <BrowserRouter>
+        <div>
+          <Main />
+        </div>
+      </BrowserRouter>
+      </Provider>
+      
     );
     
   }
